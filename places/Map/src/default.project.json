@@ -1,0 +1,13 @@
+{
+  "name": "MapPlace",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": { "Shared": { "$path": "src/shared" } },
+    "ServerScriptService": { "Server": { "$path": "src/server" } },
+    "StarterPlayer": {
+      "StarterPlayerScripts": { "Client": { "$path": "src/client" } }
+    },
+    "StarterGui": { "UI": { "$path": "src/ui" } },
+    "StarterPack": { "Tools": { "$path": "src/tools" } }
+  }
+}
