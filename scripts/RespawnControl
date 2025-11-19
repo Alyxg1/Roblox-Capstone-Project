@@ -1,0 +1,10 @@
+-- ServerScriptService/RespawnControl.server.lua
+local Players = game:GetService("Players")
+
+-- Turn off automatic respawn globally
+Players.CharacterAutoLoads = false
+
+-- Spawn the character one time on join
+Players.PlayerAdded:Connect(function(plr)
+	plr:LoadCharacter()
+end)
