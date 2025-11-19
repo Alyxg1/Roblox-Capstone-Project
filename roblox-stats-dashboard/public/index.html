@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Roblox Highest Round Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; margin: 24px; }
+    h1 { margin: 0 0 12px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { padding: 8px 10px; border-bottom: 1px solid #ddd; text-align: left; }
+    th { background: #f6f6f6; }
+    .muted { color: #666; }
+  </style>
+</head>
+<body>
+  <h1>Highest Round (Live)</h1>
+  <p class="muted">Auto-refreshes every 5 seconds.</p>
+  <table id="t">
+    <thead>
+      <tr><th>#</th><th>User</th><th>User ID</th><th>Highest Round</th><th>Updated</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <script>
+    async function refresh() {
+      try {
+        const r = await fetch("/api/latest", { cache: "no-store" });
+        const j = await r.json();
+        const tb = document.querySelector("#t tbody");
+        tb.innerHTML = "";
+        if (!j.ok) return;
+        j.rows.forEach((row, i) => {
+          const tr = document.createElement("tr");
+          const when = new Date((row.updatedAt||0)*1000).toLocaleString();
+          tr.innerHTML = `
+            <td>${i+1}</td>
+            <td>${row.username}</td>
+            <td>${row.userId}</td>
+            <td>${row.highestRound}</td>
+            <td>${when}</td>
+          `;
+          tb.appendChild(tr);
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    refresh();
+    setInterval(refresh, 5000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "roblox-stats-dashboard",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "cross-env STATS_SECRET=dev-secret PORT=3020 node server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.4.1",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "express": "^5.1.0"
+  }
+}
